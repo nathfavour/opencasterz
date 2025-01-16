@@ -22,7 +22,6 @@ class CastScreen extends StatelessWidget {
               duration: Duration(seconds: 2),
               child: Text(
                 'Casting to selected device...',
-                'Casting to selected device...',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
