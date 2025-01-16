@@ -3,6 +3,10 @@ import '../widgets/device_list.dart';
 import '../widgets/cast_button.dart';
 
 class HomeScreen extends StatelessWidget {
+  Future<void> fetchDevices() async {
+    // If you need to refresh devices here, call your device fetching logic
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,16 +14,13 @@ class HomeScreen extends StatelessWidget {
         title: Text('OpenCasterz Home'),
       ),
       body: RefreshIndicator(
-        onRefresh: () async {
-          await fetchDevices();
-        },
+        onRefresh: fetchDevices,
         child: Column(
           children: [
             Expanded(
               child: AnimatedSwitcher(
                 duration: Duration(milliseconds: 300),
                 child: DeviceList(),
-  }
               ),
             ),
             CastButton(),
@@ -28,16 +29,4 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-              ),
-            ),
-            CastButton(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 }
