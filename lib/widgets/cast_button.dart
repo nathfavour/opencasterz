@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/casting_service.dart';
+import '../utils/constants.dart';
 
 class CastButton extends StatefulWidget {
   @override
@@ -9,17 +10,18 @@ class CastButton extends StatefulWidget {
 class _CastButtonState extends State<CastButton> {
   bool isCasting = false;
 
-  void toggleCasting() async {
-    setState(() {
-      isCasting = true;
-    });
-    // Start casting
-    await CastingService.startCasting();
-    setState(() {
-      isCasting = false;
-    });
-    // Navigate to CastScreen
-    Navigator.pushNamed(context, '/cast');
+  Future<void> toggleCasting() async {
+    if (isCasting) return;
+
+    setState(() => isCasting = true);
+    try {
+      await CastingService.startCasting();
+      Navigator.pushNamed(context, '/cast');
+    } catch (e) {
+      // Handle error
+    } finally {
+      setState(() => isCasting = false);
+    }
   }
 
   @override
@@ -29,20 +31,15 @@ class _CastButtonState extends State<CastButton> {
       child: ElevatedButton(
         onPressed: isCasting ? null : toggleCasting,
         style: ElevatedButton.styleFrom(
-          primary: Colors.blueAccent,
+          backgroundColor: Constants.primaryColor,
           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-        ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(Constants.borderRadius),
           ),
-          elevation: 5,
         ),
         child: AnimatedSwitcher(
-          duration: Duration(milliseconds: 300),
-          transitionBuilder: (child, animation) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-                width: 24,
+          duration: Constants.animationDuration,
+          child: isCasting
               ? SizedBox(
                   width: 24,
                   height: 24,
@@ -51,46 +48,9 @@ class _CastButtonState extends State<CastButton> {
                     strokeWidth: 2,
                   ),
                 )
-              : Text(
-                  'Cast',
-                  key: ValueKey('cast'),
-                ),
+              : Text('Cast', style: TextStyle(fontSize: 16)),
         ),
       ),
-
-    );
-  }
-
-}
-                height: 24,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  strokeWidth: 2,
-                ),
-              )
-            : Text(
-                'Cast',
-                key: ValueKey('cast'),
-              ),
-      ),
     );
   }
 }
-          child: isCasting
-        ),
-        elevation: 5,
-      ),
-      child: isCasting ? CircularProgressIndicator() : Text('Cast'),
-    );
-  }
-          return FadeTransition(opacity: animation, child: child);
-        },
-        child: isCasting
-            ? SizedBox(
-}
-
-        elevation: 5,
-        duration: Constants.animationDuration,
-        transitionBuilder: (child, animation) {
-      ),
-      child: AnimatedSwitcher(
