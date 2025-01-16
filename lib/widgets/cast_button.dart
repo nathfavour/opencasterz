@@ -24,9 +24,73 @@ class _CastButtonState extends State<CastButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: isCasting ? null : toggleCasting,
-      child: isCasting ? CircularProgressIndicator() : Text('Cast'),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ElevatedButton(
+        onPressed: isCasting ? null : toggleCasting,
+        style: ElevatedButton.styleFrom(
+          primary: Colors.blueAccent,
+          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          elevation: 5,
+        ),
+        child: AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          transitionBuilder: (child, animation) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+                width: 24,
+              ? SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    strokeWidth: 2,
+                  ),
+                )
+              : Text(
+                  'Cast',
+                  key: ValueKey('cast'),
+                ),
+        ),
+      ),
+
+    );
+  }
+
+}
+                height: 24,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  strokeWidth: 2,
+                ),
+              )
+            : Text(
+                'Cast',
+                key: ValueKey('cast'),
+              ),
+      ),
     );
   }
 }
+          child: isCasting
+        ),
+        elevation: 5,
+      ),
+      child: isCasting ? CircularProgressIndicator() : Text('Cast'),
+    );
+  }
+          return FadeTransition(opacity: animation, child: child);
+        },
+        child: isCasting
+            ? SizedBox(
+}
+
+        elevation: 5,
+        duration: Constants.animationDuration,
+        transitionBuilder: (child, animation) {
+      ),
+      child: AnimatedSwitcher(

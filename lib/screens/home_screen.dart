@@ -9,12 +9,35 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('OpenCasterz Home'),
       ),
-      body: Column(
-        children: [
-          DeviceList(),
-          CastButton(),
-        ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await fetchDevices();
+        },
+        child: Column(
+          children: [
+            Expanded(
+              child: AnimatedSwitcher(
+                duration: Duration(milliseconds: 300),
+                child: DeviceList(),
+  }
+              ),
+            ),
+            CastButton(),
+          ],
+        ),
       ),
     );
   }
+}
+
+              ),
+            ),
+            CastButton(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 }
