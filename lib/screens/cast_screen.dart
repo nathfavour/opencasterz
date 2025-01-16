@@ -8,7 +8,7 @@ class CastScreen extends StatelessWidget {
         title: Text('Casting'),
       ),
       body: Center(
-        Text('Casting to selected device...'),
+        child: Text('Casting to selected device...'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
