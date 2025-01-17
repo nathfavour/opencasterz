@@ -5,6 +5,63 @@ import '../widgets/device_list.dart';
 import '../widgets/cast_button.dart';
 import '../widgets/side_menu.dart';
 
+class _BuildFeaturedSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Featured Devices',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              SizedBox(height: 8),
+              Text('Discover and connect to nearby devices'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _BuildHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: Constants.headerHeight,
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Text(
+            'Dashboard',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          Spacer(),
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {/* TODO: Implement search */},
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

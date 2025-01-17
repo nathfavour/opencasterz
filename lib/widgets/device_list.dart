@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/device_model.dart';
 import '../services/casting_service.dart';
 import '../utils/constants.dart';
+import '../utils/responsive_layout.dart';
 
 class DeviceList extends StatefulWidget {
   @override
